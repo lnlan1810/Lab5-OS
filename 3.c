@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     FILE *file = fopen(filename, "a");
     if (file == NULL) {
         // В случае ошибки при открытии файла выводим сообщение об ошибке и завершаем программу
-        perror("Ошибка открытия файла");
+        perror("Error opening file");
         exit(EXIT_FAILURE);
     }
 
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
         // Пишем символ в файл
         if (fputc(ch, file) == EOF) {
             // В случае ошибки при записи символа выводим сообщение об ошибке, закрываем файл и завершаем программу
-            perror("Ошибка записи в файл");
+            perror("Error writing to file");
             fclose(file);
             exit(EXIT_FAILURE);
         }
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
     // Закрываем файл после успешной записи данных
     if (fclose(file) == EOF) {
         // В случае ошибки при закрытии файла выводим сообщение об ошибке и завершаем программу
-        perror("Ошибка закрытия файла");
+        perror("Error closing file");
         exit(EXIT_FAILURE);
     }
 
