@@ -7,7 +7,7 @@
 // Функция для вывода списка файлов и подкаталогов в указанном пути
 void listDirectory(const char *path) {
     DIR *dir;
-    struct dirent *entry;
+    struct dirent *entry; // Объявление указателя типа struct dirent для представления информации о элементах в каталоге
 
     // Открываем соединение с каталогом
     dir = opendir(path);
@@ -21,9 +21,9 @@ void listDirectory(const char *path) {
     // Выводим содержимое каталога
     while ((entry = readdir(dir)) != NULL) {
         if (entry->d_name[0] != '.') {
-            printf("%s\n", entry->d_name);
+            printf("%s\n", entry->d_name); 
         }
-    }
+    } // Перебор элементов в каталоге и вывод имен тех, которые не начинаются с точки (то есть, не скрытые файлы), на экран.
 
     // Закрываем соединение с каталогом
     if (closedir(dir) == -1) {
