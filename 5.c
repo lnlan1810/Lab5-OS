@@ -48,7 +48,9 @@ void copyFile(const char *sourceFileName, const char *destinationFileName) {
         fclose(sourceFile);
         exit(EXIT_FAILURE);
     }
-    if ((destinationFile = fopen(destinationFileName, "wb")) == NULL) {
+    if ((destinationFile = fopen(destinationFileName, "wb")) == NULL)
+    //проверьте, удалось ли открыть файл destinationFileName для двоичной записи («wb»)
+    {
         perror("Error opening destination file ");
         fclose(sourceFile);
         exit(EXIT_FAILURE);
