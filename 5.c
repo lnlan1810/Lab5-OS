@@ -34,8 +34,16 @@ void copyFile(const char *sourceFileName, const char *destinationFileName) {
     }
 
     // Проверка прав на чтение и открытие целевого файла для записи
-    struct stat st;
-    if (stat(destinationFileName, &st) == 0 && !(st.st_mode & S_IWUSR)) {
+    struct stat st; //stat позволяют процессу определить значения свойств в существующем файле.
+    
+    if (stat(destinationFileName, &st) == 0 && !(st.st_mode & S_IWUSR))
+    //stat(destinationFileName, &st) == 0: функция stat для получения информации о файле с именем DestinationFileName 
+    // и сохранения этой информации в переменной st. Если функция выполняется успешно (возвращает 0), условие истинно.
+    // !(st.st_mode & S_IWUSR): проверьте, установлено ли разрешение на запись для владельца файла или нет. 
+    // Выражение (st.st_mode & S_IWUSR) вернет S_IWUSR (разрешение на запись для пользователя), 
+    // если разрешение на запись было установлено, в противном случае оно вернет 0. 
+    // Это условие будет истинным, если разрешение на запись для пользователя не установлено.
+    {
         fprintf(stderr, "Error: No write permission for the destination file\n");
         fclose(sourceFile);
         exit(EXIT_FAILURE);
