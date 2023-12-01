@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
 
     // Получение параметров командной строки
     const char* directory = argv[1];
-    int min_size = atoi(argv[2]);
+    int min_size = atoi(argv[2]); //берет целочисленное значение из argv[2] и присваивает его переменной min_size.
     int max_size = atoi(argv[3]);
     const char* output_file_name = argv[4];
 
