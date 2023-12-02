@@ -67,7 +67,9 @@ void search_files(const char* path, int min_size, int max_size, FILE* output_fil
         }
 
         if (S_ISDIR(st.st_mode)) { // Если это каталог
-            if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
+            if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) 
+            //Проверьте, соответствует ли имя текущего каталога "." (рабочий каталог) или «..» (родительский каталог) нет.
+            {
                 continue; // Пропуск . и ..
             }
             search_files(full_path, min_size, max_size, output_file, count); // Рекурсивный вызов для подкаталога
