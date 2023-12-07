@@ -1,9 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Функция для отображения содержимого файла с паузой каждые N символов
+// Функция ожидания нажатия клавиши Enter
+void waitForEnter() {
+    printf("\nPress Enter to continue...");
+    int ch;
+
+    // Считываем каждый символ до нажатия Enter
+    while ((ch = getchar()) != '\n' && ch != EOF) {
+        // Проверяем ошибку при чтении из stdin
+        if (ch == EOF) {
+            perror("Error reading from stdin");
+            break;
+        }
+    }
+}
+
+// Функция вывода содержимого файла с паузой после каждых N символов
 void displayFile(char *filename, int N) {
-    // Открываем файл в режиме чтения
     FILE *file = fopen(filename, "r");
 
     // Проверяем успешное открытие файла
@@ -27,19 +41,9 @@ void displayFile(char *filename, int N) {
         putchar(c);
         count++;
 
-        // Если N больше 0 и count кратен N, делаем паузу и ждем Enter
+        // Если N больше 0 и count кратен N, вызываем функцию ожидания Enter
         if (N > 0 && count % N == 0) {
-            printf("\nPress Enter to continue...");
-            int ch;
-
-            // Ждем, пока не будет нажат Enter
-            while ((ch = getchar()) != '\n' && ch != EOF) {
-                // Проверяем ошибки при чтении из stdin
-                if (ch == EOF) {
-                    perror("Error reading from stdin");
-                    break;
-                }
-            }
+            waitForEnter();
         }
     }
 
@@ -72,7 +76,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // Вызываем функцию displayFile для отображения содержимого файла
+    // Вызываем функцию displayFile для вывода содержимого файла
     displayFile(filename, N);
 
     // Возвращаем 0, чтобы указать успешное выполнение программы
